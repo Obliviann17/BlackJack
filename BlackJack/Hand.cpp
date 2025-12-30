@@ -42,5 +42,5 @@ size_t Hand::getCardCount() const
 
 const std::vector<std::unique_ptr<Card>>& Hand::getCards() const
 {
-	
+	return mCards;
 }
