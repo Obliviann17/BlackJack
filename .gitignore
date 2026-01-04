@@ -37,3 +37,19 @@
 
 # Build
 Build
+
+# Qt 
+*.pro.user
+*.ups
+*.user
+build-*/
+*.o
+*.moc
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+Makefile*
+debug/
+release/
+x64/
+*.exe
