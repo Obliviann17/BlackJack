@@ -27,10 +27,15 @@ private:
     void onHitClicked();
     void onStandClicked();
 
+    void onDealClicked();
+    void onBetPlus();
+    void onBetMinus();
+
 private:
     void startNewGame();
     void updateUI();
     void addCardToScene(const Card* card, int index, bool isDealer);
+    void checkGameStatus();
 
     Ui::MainWindow *ui;
 
@@ -39,5 +44,9 @@ private:
     std::unique_ptr<Deck> mDeck;
     std::unique_ptr<Player> mPlayer;
     std::unique_ptr<Dealer> mDealer;
+
+    int mBalance = 1000;
+    int mCurrentBet = 10;
+    bool mGameInProgress = false;
 };
 #endif // MAINWINDOW_H
