@@ -2,6 +2,8 @@
 
 #include "CardItem.h"
 
+QString CardItem::currentSkinPath = "assets/back_red.png";
+
 CardItem::CardItem(const Card* card, QObject* parent)
     : QObject(parent), QGraphicsPixmapItem(), mCard(card)
 {
@@ -76,7 +78,7 @@ CardItem::CardItem(const Card* card, QObject* parent)
         mFrontPixmap.fill(Qt::red);
     }
 
-    mBackPixmap = QPixmap("assets/back.png");
+    mBackPixmap = QPixmap(currentSkinPath);
     if(mBackPixmap.isNull())
     {
         mBackPixmap = QPixmap(100, 145);
@@ -112,4 +114,12 @@ void CardItem::setFaceUp(bool faceUp)
     {
         setPixmap(mBackPixmap);
     }
+}
+
+void CardItem::updateSkin(QString skinPath)
+{
+    mBackPixmap = QPixmap(skinPath);
+
+    if(!mIsFaceUp)
+        setPixmap(mBackPixmap);
 }

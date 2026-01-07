@@ -20,6 +20,9 @@ public:
     void setFaceUp(bool faceUp);
     bool isFaceUp() const  {return mIsFaceUp; };
 
+    static QString currentSkinPath;
+    void updateSkin(QString skinPath);
+
 private:
     const Card* mCard;
     QString mCurrentSkin;

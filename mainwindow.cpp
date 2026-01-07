@@ -15,6 +15,26 @@ MainWindow::MainWindow(QWidget *parent)
     ui->viewGame->setScene(mScene);
     ui->viewGame->setSceneRect(0, 0, 800, 600);
 
+    ui->viewGame->setStyleSheet("background-color: #0d4d0d; border: none; ");
+
+    QString btnStyle = "QPushButton { "
+                       " background-color: white; "
+                       " border-radius: 5px; "
+                       " font-weight: bold; "
+                       " padding: 5px; "
+                       "}"
+                       "QPushButton::disabled {"
+                       " background-color: #aaaaaa; "
+                       "}";
+
+    ui->btnHit->setStyleSheet(btnStyle);
+    ui->btnStand->setStyleSheet(btnStyle);
+    ui->btnDeal->setStyleSheet(btnStyle);
+
+    ui->lblScorePlayer->setStyleSheet("color: white; font-size: 16px; font-weight: bold;");
+    ui->lblBalance->setStyleSheet("color: yellow; font-size: 16px; font-weight: bold;");
+    ui->lblBet->setStyleSheet("color: white; font-size: 14px; ");
+
     ui->viewGame->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->viewGame->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -30,6 +50,26 @@ MainWindow::MainWindow(QWidget *parent)
     ui->btnDeal->setEnabled(true);
 
     updateUI();
+
+    connect(ui->comboSkins, &QComboBox::currentIndexChanged, this, [this](int index)
+    {
+        QString newPath;
+
+        if(index == 0)
+            newPath = "assets/back_red.png";
+        else
+            newPath = "assets/back_blue.png";
+
+        CardItem::currentSkinPath = newPath;
+
+        auto items = mScene->items();
+        for(auto* item : items)
+        {
+            CardItem* card = dynamic_cast<CardItem*>(item);
+            if(card)
+                card->updateSkin(newPath);
+        }
+    });
 }
 
 MainWindow::~MainWindow()
